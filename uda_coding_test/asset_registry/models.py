@@ -22,10 +22,10 @@ class Asset(models.Model):
     area = models.IntegerField()
 
     # Optional
-    address = models.CharField(max_length=60, blank=True)
-    garage = models.BooleanField(blank=True)
-    other = models.JSONField(blank=True)
-    rooms = models.IntegerField(blank=True)
+    address = models.CharField(max_length=60, blank=True, null=True)
+    garage = models.BooleanField(blank=True, null=True)
+    other = models.JSONField(blank=True, null=True)
+    rooms = models.IntegerField(blank=True, null=True)
 
     # Methods
     def __str__(self):
