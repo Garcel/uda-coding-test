@@ -5,8 +5,8 @@ class GeoPosition(models.Model):
     """Model representing the coordinates of a terrestrial point."""
 
     # Fields
-    latitude = models.DecimalField(max_digits=13, decimal_places=10)
-    longitude = models.DecimalField(max_digits=13, decimal_places=10)
+    latitude = models.DecimalField(max_digits=18, decimal_places=15)
+    longitude = models.DecimalField(max_digits=18, decimal_places=15)
 
     # Methods
     def __str__(self):
