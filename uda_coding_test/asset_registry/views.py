@@ -5,5 +5,11 @@ from .serializers import AssetSerializer
 
 
 class AssetListView(generics.ListCreateAPIView):
+    """
+    Endpoint used to:
+        GET the list of registered assets
+        POST an asset
+    """
+
     queryset = Asset.objects.all()
     serializer_class = AssetSerializer
