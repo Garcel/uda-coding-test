@@ -28,6 +28,9 @@ class AssetListViewTest(APITestCase):
         self.uri = '/assets/'
 
     def test_view_url_exists_at_desired_location(self):
+        """
+        Ensure that /assets endpoint exists.
+        """
         request = self.factory.get(self.uri)
         response = self.view(request)
 
@@ -38,7 +41,7 @@ class AssetListViewTest(APITestCase):
 
     def test_assets_list(self):
         """
-        Ensure that all the registered assets are returned.
+        Ensure that GET /assets returns all the registered assets.
         """
         request = self.factory.get(self.uri)
         response = self.view(request)
@@ -67,7 +70,8 @@ class AssetListViewTest(APITestCase):
 
     def test_create_asset_without_geom_fails(self):
         """
-        Ensure that the asset creation fails when the `geom` property is not provided.
+        Ensure that POST /assets return HTTP_400_BAD_REQUEST status code when asset creation fails due to the `geom`
+        property is not provided.
         """
         data = {
             'area': 1
@@ -77,11 +81,14 @@ class AssetListViewTest(APITestCase):
         response = self.view(request)
 
         # Assert response status code
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST,
+                         'Expected Response Code 400, received {0} instead.'
+                         .format(response.status_code))
 
     def test_create_asset_without_area_fails(self):
         """
-        Ensure that the asset creation fails when the `area` property is not provided.
+        Ensure that POST /assets return HTTP_400_BAD_REQUEST status code when asset creation fails due to the `area`
+        property is not provided.
         """
         data = {
             'geom': {
@@ -94,11 +101,13 @@ class AssetListViewTest(APITestCase):
         response = self.view(request)
 
         # Assert response status code
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST,
+                         'Expected Response Code 400, received {0} instead.'
+                         .format(response.status_code))
 
     def test_create_asset_with_mandatory_props_is_successful(self):
         """
-        Ensure that the new asset is created properly when only the asset's mandatory properties are provided.
+        Ensure that POST /assets properly creates the asset when only the asset's mandatory properties are provided.
         """
         data = {
             'geom': {
@@ -112,7 +121,9 @@ class AssetListViewTest(APITestCase):
         response = self.view(request)
 
         # Assert response status code
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED,
+                         'Expected Response Code 201, received {0} instead.'
+                         .format(response.status_code))
 
         # Assert response content
         # Mandatory
@@ -128,7 +139,7 @@ class AssetListViewTest(APITestCase):
 
     def test_create_asset_with_all_props_is_successful(self):
         """
-        Ensure that the new asset is created properly when all the asset's properties are provided.
+        Ensure that POST /assets properly creates the asset when all the asset's properties are provided.
         """
         data = {
             'geom': {
@@ -148,7 +159,9 @@ class AssetListViewTest(APITestCase):
         response = self.view(request)
 
         # Assert response status code
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED,
+                         'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
 
         # Assert response content
         # Mandatory
