@@ -27,7 +27,8 @@ SECRET_KEY = '+tu#kpflsp12+77@%ay52ee_mi41lxwud5h(8g@6o!e5)e7#ib'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://uda-coding-test.herokuapp.com/',
+                 'https://uda-coding-test-development.herokuapp.com/']
 
 # Application definition
 
