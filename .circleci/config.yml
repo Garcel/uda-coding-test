@@ -12,14 +12,14 @@ jobs:
           name: create .env file
           command: |
             touch .env
-            echo $DEBUG >> .env
-            echo $SECRET_KEY >> .env
-            echo $PORT >> .env
-            echo $DATABASE_NAME >> .env
-            echo $DATABASE_USER >> .env
-            echo $DATABASE_PASSWORD >> .env
-            echo $DATABASE_HOST >> .env
-            echo $DATABASE_PORT >> .env
+            echo DEBUG=$DEBUG >> .env
+            echo SECRET_KEY=$SECRET_KEY >> .env
+            echo PORT=$PORT >> .env
+            echo DATABASE_NAME=$DATABASE_NAME >> .env
+            echo DATABASE_USER=$DATABASE_USER >> .env
+            echo DATABASE_PASSWORD=$DATABASE_PASSWORD >> .env
+            echo DATABASE_HOST=$DATABASE_HOST >> .env
+            echo DATABASE_PORT=$DATABASE_PORT >> .env
 
       - run:
           name: build containers
