@@ -6,14 +6,14 @@ Deploy an HTTP REST API service that allows to create assets into a database.
 Some variables are expected to exist into the environment. In my development environment I'm using and `.env` file 
 with these properties:
 ```properties
-DEBUG=
+DEBUG=on
 SECRET_KEY=
-PORT=
-DATABASE_NAME=
-DATABASE_USER=
-DATABASE_PASSWORD=
-DATABASE_HOST=
-DATABASE_PORT=
+PORT=8000
+DATABASE_HOST=db
+DATABASE_PORT=5432
+POSTGRES_DB=test
+POSTGRES_USER=test
+POSTGRES_PASSWORD=test
 ```
 
 
