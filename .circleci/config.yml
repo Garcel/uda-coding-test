@@ -5,23 +5,21 @@ jobs:
 
     working_directory: ~/repo
 
-    environment:
-      DEBUG: on
-      SECRET_KEY: test
-      PORT: 8000
-      DATABASE_NAME: test
-      DATABASE_USER: test
-      DATABASE_PASSWORD: test
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
-
     steps:
       - checkout
 
       - run:
-          name: create empty .env file
+          name: create .env file
           command: |
             touch .env
+            echo $DEBUG >> .env
+            echo $SECRET_KEY >> .env
+            echo $PORT >> .env
+            echo $DATABASE_NAME >> .env
+            echo $DATABASE_USER >> .env
+            echo $DATABASE_PASSWORD >> .env
+            echo $DATABASE_HOST >> .env
+            echo $DATABASE_PORT >> .env
 
       - run:
           name: build containers
