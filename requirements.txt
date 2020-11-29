@@ -2,4 +2,5 @@ Django>=3.0,<4.0
 django-heroku
 djangorestframework
 drf-yasg
+gunicorn==20.0.4
 psycopg2-binary>=2.8
