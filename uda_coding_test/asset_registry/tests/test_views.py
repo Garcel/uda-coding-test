@@ -161,3 +161,92 @@ class AssetListViewTest(APITestCase):
         self.assertEqual(response.data['garage'], data['garage'])
         self.assertEqual(response.data['other']['elevator'], data['other']['elevator'])
         self.assertEqual(response.data['rooms'], data['rooms'])
+
+
+class AssetListDetailViewTest(APITestCase):
+
+    def setUp(self):
+        self.factory = APIRequestFactory()
+        self.view = views.AssetListDetailView.as_view()
+        self.uri = '/assets/'
+        self.asset = Asset.objects.create(
+            geom=GeoPosition.objects.create(
+                latitude=42.5507956317338,
+                longitude=-6.603349658436887,
+            ),
+            area=1,
+        )
+
+        self.empty_pk = Asset.objects.latest('id').pk + 1
+
+    def test_view_url_exists_at_desired_location(self):
+        """
+        Ensure that /assets/{pk} endpoint exists.
+        """
+        request = self.factory.get(self.uri)
+        response = self.view(request, pk=self.asset.pk)
+
+        # Assert response status code
+        self.assertEqual(response.status_code, status.HTTP_200_OK,
+                         'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
+
+    def test_basic_asset_detail_when_exists(self):
+        """
+        Ensure that GET /assets/{pk} returns the registered asset when the asset exists.
+        """
+        request = self.factory.get(self.uri)
+        response = self.view(request, pk=self.asset.pk)
+
+        # Assert response status code
+        self.assertEqual(response.status_code, status.HTTP_200_OK,
+                         'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
+
+        # Assert asset content
+        # Mandatory
+        self.assertAlmostEqual(float(response.data['geom']['latitude']), self.asset.geom.latitude)
+        self.assertAlmostEqual(float(response.data['geom']['longitude']), self.asset.geom.longitude)
+        self.assertEqual(response.data['area'], self.asset.area)
+
+        # Optional
+        self.assertIsNone(response.data['address'])
+        self.assertIsNone(response.data['garage'])
+        self.assertIsNone(response.data['rooms'])
+        self.assertIsNone(response.data['other'])
+
+    def test_asset_detail_when_does_not_exist(self):
+        """
+        Ensure that GET /assets/{pk} returns an HTTP_404_NOT_FOUND status code when the assets does not exist.
+        """
+        request = self.factory.get(self.uri)
+        response = self.view(request, pk=self.empty_pk)
+
+        # Assert response status code
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND,
+                         'Expected Response Code 404, received {0} instead.'
+                         .format(response.status_code))
+
+    def test_delete_asset_when_exists(self):
+        """
+        Ensure that DELETE /assets/{pk} successfully deletes the asset when it exists.
+        """
+        request = self.factory.delete(self.uri, format='json')
+        response = self.view(request, pk=self.asset.pk)
+
+        # Assert response status code
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT,
+                         'Expected Response Code 204, received {0} instead.'
+                         .format(response.status_code))
+
+    def test_delete_asset_when_does_not_exist(self):
+        """
+        Ensure that DELETE /assets/{pk} returns an HTTP_404_NOT_FOUND status code when the assets does not exist.
+        """
+        request = self.factory.delete(self.uri, format='json')
+        response = self.view(request, pk=self.empty_pk)
+
+        # Assert response status code
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND,
+                         'Expected Response Code 404, received {0} instead.'
+                         .format(response.status_code))

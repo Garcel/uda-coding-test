@@ -13,3 +13,14 @@ class AssetListView(generics.ListCreateAPIView):
 
     queryset = Asset.objects.all()
     serializer_class = AssetSerializer
+
+
+class AssetListDetailView(generics.RetrieveDestroyAPIView):
+    """
+    Endpoint used to:
+        GET the details of an asset
+        DELETE an asset
+    """
+
+    queryset = Asset.objects.all()
+    serializer_class = AssetSerializer
