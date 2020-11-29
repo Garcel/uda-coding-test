@@ -1,1 +1,3 @@
-web: python manage.py runserver 0.0.0.0:8000
+release: python manage.py migrate
+
+web: gunicorn uda_coding_test.wsgi --log-file -
