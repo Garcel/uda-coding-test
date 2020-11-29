@@ -1,9 +1,12 @@
 # Byte-compiled / optimized / DLL files
 **/__pycache__/**
 
-# static
-staticfiles/**
+# Environment settings file
+.env
 
 # IDE
 .iml
 .idea/**
+
+# static
+staticfiles/**
