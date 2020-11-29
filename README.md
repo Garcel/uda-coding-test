@@ -6,7 +6,7 @@ Deploy an HTTP REST API service that allows to create assets into a database.
 Some variables are expected to exist into the environment. In my development environment I'm using and `.env` file 
 with these properties:
 ```properties
-DEBUG=on
+DEBUG=True
 SECRET_KEY=
 PORT=8000
 DATABASE_HOST=db
@@ -17,9 +17,7 @@ POSTGRES_PASSWORD=test
 ```
 
 
-## Usage
-
-Run:
+## Running the application
 ```bash
 docker-compose up --build
 ```
