@@ -20,7 +20,7 @@ jobs:
             echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
             echo DATABASE_HOST=$DATABASE_HOST >> .env
             echo DATABASE_PORT=$DATABASE_PORT >> .env
-            echo COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN
+            echo COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN >> .env
 
       - run:
           name: build containers
