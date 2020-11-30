@@ -20,6 +20,7 @@ jobs:
             echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
             echo DATABASE_HOST=$DATABASE_HOST >> .env
             echo DATABASE_PORT=$DATABASE_PORT >> .env
+            echo COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN
 
       - run:
           name: build containers
@@ -37,6 +38,12 @@ jobs:
             docker-compose run web python manage.py migrate
 
       - run:
-          name: run tests
+          name: run tests with coverage and send results to coveralls.io
           command: |
-            docker-compose run web python manage.py test
+            docker-compose run web coverage run --source='.' manage.py test
+            docker-compose run web coverage report
+            docker-compose run web coverage html
+            docker-compose run web coveralls
+
+      - store_artifacts:
+          path: htmlcov

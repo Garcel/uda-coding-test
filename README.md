@@ -56,6 +56,13 @@ docker-compose run web python manage.py test
 | ------------- | ------------- |
 [![CircleCI](https://circleci.com/gh/Garcel/uda-coding-test/tree/master.svg?style=shield)](https://circleci.com/gh/Garcel/uda-coding-test/tree/master.svg?style=shield)|[![CircleCI](https://circleci.com/gh/Garcel/uda-coding-test/tree/development.svg?style=shield)](https://circleci.com/gh/Garcel/uda-coding-test/tree/development.svg?style=shield)
 
+### Coverage :bar_chart:
+
+|master|development|
+| ------------- | ------------- |
+[![Coverage Status](https://coveralls.io/repos/github/Garcel/uda-coding-test/badge.svg?branch=master)](https://coveralls.io/github/Garcel/uda-coding-test?branch=master)|[![Coverage Status](https://coveralls.io/repos/github/Garcel/uda-coding-test/badge.svg?branch=development)](https://coveralls.io/github/Garcel/uda-coding-test?branch=development)
+
+
 ## Check it out at Heroku :beers:
 
 ```http request
