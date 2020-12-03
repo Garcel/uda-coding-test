@@ -3,6 +3,8 @@
 The goal is to deploy an HTTP REST API service that allows to create assets into a database.
 
 The following libraries and frameworks were used:
+- [coverage](https://pypi.org/project/coverage/)
+- [coveralls](https://pypi.org/project/coveralls/)
 - [Django](https://pypi.org/project/Django/)
 - [django-heroku](https://pypi.org/project/django-heroku/)
 - [djangorestframework](https://pypi.org/project/djangorestframework/)
